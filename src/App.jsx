@@ -5,7 +5,7 @@ import AllRoutes from "./AllRoutes";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{background:"#071952"}}>
       <AllRoutes />
     </div>
   );
