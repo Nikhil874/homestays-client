@@ -12,44 +12,65 @@ const TenentsPage = () => {
   const { id: roomId } = params;
   const [users, setUsers] = useState([]);
   const defaultUser = {
-    name: null,
-    startDate: null,
-    amount: null,
+    name: "",
+    startDate: "",
+    amount: "",
   };
   const [userData, setUserData] = useState(defaultUser);
   const [roomData, setRoomData] = useState({});
   const [sharingType, setSharingType] = useState(0);
   //   setUserData({...defaultUser})
+  // function clear()=()=>
   const addUser = async () => {
-    const payload = {
-      ...userData,
-      room: roomId,
-    };
-    const res = await axios.post(`${BASE_URL}/users`, payload);
-    console.log(res.data);
-    getUsersData(roomId);
-    setUserData({ ...defaultUser });
+    try{
+      const payload = {
+        ...userData,
+        room: roomId,
+        amount:Number(userData.amount)
+      };
+      await axios.post(`${BASE_URL}/users`, payload);
+      console.log("current",userData)
+      setUserData({...defaultUser});
+      // console.log(res.data);
+      
+    } catch (e) {
+      console.log(e.message)
+    } finally {
+      getUsersData(roomId);
+    }
   };
   const getUsersData = async (id) => {
-    const res = await axios.get(`${BASE_URL}/users/${id}`);
-    setUsers(res?.data);
+    try {
+      const res = await axios.get(`${BASE_URL}/users/${id}`);
+      setUsers(res?.data);
+    } catch (e) {
+      console.log(e.message);
+    }
   };
 
   const getRoomData = async () => {
-    const res = await axios.get(`${BASE_URL}/rooms/roomDetails/${roomId}`);
-    console.log(res?.data);
-    setRoomData(res?.data);
+    try {
+      const res = await axios.get(`${BASE_URL}/rooms/roomDetails/${roomId}`);
+      console.log(res?.data);
+      setRoomData(res?.data);
+    } catch (e) {
+      console.log(e.message);
+    }
   };
 
   const deleteUser = async (id) => {
-    const res = await axios.delete(`${BASE_URL}/users/${id}`);
-    console.log(res?.data);
-    getUsersData(roomId);
+    try {
+      const res = await axios.delete(`${BASE_URL}/users/${id}`);
+      console.log(res?.data);
+      getUsersData(roomId);
+    } catch (e) {
+      console.log(e.message);
+    }
   };
 
   const editSharingType = async () => {
     try {
-      const res = await axios.patch(`${BASE_URL}/rooms/${roomId}`, {
+      const res = await axios.post(`${BASE_URL}/rooms/${roomId}`, {
         sharingType: Number(sharingType),
       });
       console.log(res?.data);
