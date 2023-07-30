@@ -1,28 +1,32 @@
 import styled from "@emotion/styled";
-import { Box } from "@mui/material";
-import React, { Children } from "react";
+import React from "react";
 
 const CustomBox = (props) => {
   return (
-    <BoxContainer
-      style={{
-        width: "200px",
-        height: "200px",
-        border: "1px solid black",
-        background: "#FAF0D7",
-        marginTop:"25px",
-        padding:"25px"
-      }}
-    >
+    <BoxContainer>
       {props.children}
     </BoxContainer>
   );
 };
 
-const BoxContainer =styled.div`
-  :hover{
+const BoxContainer = styled.div`
+  & {
+    min-height: 200px;
+    border: 2px solid red;
+    background: #faf0d7;
+    margin-top: 25px;
+    padding: 25px;
+  }
+  &:hover {
     cursor: pointer;
   }
-`
+  &>table>tr{
+  }
+  &>table td{
+    border:1px solid;
+    padding: 2px;
+    text-align: center;
+  }
+`;
 
 export default CustomBox;

@@ -36,7 +36,7 @@ const HomePage = () => {
         display="flex"
         sx={{ flexWrap: "wrap", gap: "20px", marginLeft: "25px" }}
       >
-        {availableHotels.map((hotel) => {
+        {!!availableHotels?.length && availableHotels.map((hotel) => {
           return (
             <div
               onClick={() => {
@@ -47,6 +47,7 @@ const HomePage = () => {
                 <>
                   <h2> PG : {hotel?.name}</h2>
                   <h2> No of floors: {hotel?.noOfFloors}</h2>
+                  <h2> total Revenue: {hotel?.totalRevenue}</h2>
                 </>
               </CustomBox>
             </div>
