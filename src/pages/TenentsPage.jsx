@@ -6,6 +6,7 @@ import CustomBox from "../components/CustomBox";
 import axios from "axios";
 import { BASE_URL } from "../constants";
 import moment from "moment/moment";
+import { toast } from "react-hot-toast";
 
 const TenentsPage = () => {
   const params = useParams();
@@ -18,23 +19,28 @@ const TenentsPage = () => {
   };
   const [userData, setUserData] = useState(defaultUser);
   const [roomData, setRoomData] = useState({});
-  const [sharingType, setSharingType] = useState(0);
+  const [sharingType, setSharingType] = useState();
   //   setUserData({...defaultUser})
   // function clear()=()=>
   const addUser = async () => {
-    try{
+    try {
       const payload = {
         ...userData,
         room: roomId,
-        amount:Number(userData.amount)
+        amount: Number(userData.amount),
       };
-      await axios.post(`${BASE_URL}/users`, payload);
-      console.log("current",userData)
-      setUserData({...defaultUser});
+      const res = await axios.post(`${BASE_URL}/users`, payload);
+      toast.success("user added success");
+      console.log("current", userData);
+      setUserData({ ...defaultUser });
       // console.log(res.data);
-      
     } catch (e) {
-      console.log(e.message)
+      toast.error(
+        typeof e?.response?.data === "string"
+          ? e.response.data
+          : "Invalid request"
+      );
+      console.log(e);
     } finally {
       getUsersData(roomId);
     }
@@ -61,22 +67,36 @@ const TenentsPage = () => {
   const deleteUser = async (id) => {
     try {
       const res = await axios.delete(`${BASE_URL}/users/${id}`);
-      console.log(res?.data);
+      toast.success("User deleted");
       getUsersData(roomId);
     } catch (e) {
-      console.log(e.message);
+      toast.error(
+        typeof e?.response?.data === "string"
+          ? e.response.data
+          : "Invalid request"
+      );
+      console.log(e);
     }
   };
 
   const editSharingType = async () => {
     try {
+      if(Number(sharingType) < users.length){
+        toast.error(`Please delete ${users.length - sharingType} users`);
+        return;
+      }
       const res = await axios.post(`${BASE_URL}/rooms/${roomId}`, {
         sharingType: Number(sharingType),
       });
-      console.log(res?.data);
-      setSharingType(0);
+      toast.success("Updated sharing type");
+      setSharingType("");
       getRoomData();
     } catch (e) {
+      toast.error(
+        typeof e?.response?.data === "string"
+          ? e.response.data
+          : "Invalid request"
+      );
       console.log(e?.message);
     }
   };
@@ -112,7 +132,7 @@ const TenentsPage = () => {
           Room no: {roomData?.roomNo}
         </h5>
         <h5 style={{ padding: "0px", margin: "0px" }}>
-          Sharing type:{roomData?.sharingType}
+          Sharing type: {roomData?.sharingType}
         </h5>
         <input
           placeholder="Enter Sharing type"

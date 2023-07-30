@@ -12,10 +12,11 @@ const CustomBox = (props) => {
 const BoxContainer = styled.div`
   & {
     min-height: 200px;
-    border: 2px solid red;
+    min-width:245px;
     background: #faf0d7;
     margin-top: 25px;
     padding: 25px;
+    text-align: center;
   }
   &:hover {
     cursor: pointer;

@@ -47,7 +47,7 @@ const HomePage = () => {
                 <>
                   <h2> PG : {hotel?.name}</h2>
                   <h2> No of floors: {hotel?.noOfFloors}</h2>
-                  <h2> total Revenue: {hotel?.totalRevenue}</h2>
+                  <h2> Total revenue: {hotel?.totalRevenue}</h2>
                 </>
               </CustomBox>
             </div>

@@ -36,7 +36,7 @@ const FloorsPage = () => {
                 <>
                   <h3> Floor No : {floor?.floorNo}</h3>
                   <h3> No of rooms: {floor?.noOfRooms}</h3>
-                  <table>
+                  <table style={{ marginLeft: "40px" }}>
                     <thead>
                       <tr>
                         <td>Sharing type</td>
@@ -44,25 +44,25 @@ const FloorsPage = () => {
                       </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>{floor?.vacancies[1]}</td>
+                      <tr>
+                        <td>1</td>
+                        <td>{floor?.vacancies[1]}</td>
                       </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>{floor?.vacancies[2]}</td>
+                      <tr>
+                        <td>2</td>
+                        <td>{floor?.vacancies[2]}</td>
                       </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>{floor?.vacancies[3]}</td>
+                      <tr>
+                        <td>3</td>
+                        <td>{floor?.vacancies[3]}</td>
                       </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>{floor?.vacancies[4]}</td>
+                      <tr>
+                        <td>4</td>
+                        <td>{floor?.vacancies[4]}</td>
                       </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>{floor?.vacancies[5]}</td>
+                      <tr>
+                        <td>5</td>
+                        <td>{floor?.vacancies[5]}</td>
                       </tr>
                     </tbody>
                   </table>

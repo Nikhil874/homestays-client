@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const NavButton = ({ path }) => {
   const naviagte = useNavigate();
-  return <Button onClick={() => naviagte(path)} sx={{marginTop:"25px"}} variant="contained">Back</Button>;
+  return <Button onClick={() => window.history.back()} sx={{marginTop:"25px"}} variant="contained">Back</Button>;
 };
 
 export default NavButton;
