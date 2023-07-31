@@ -8,7 +8,8 @@ function App() {
       className="App"
       style={{
         background: "#071952",
-        height: "350vh",
+        height: "auto",
+        minHeight:"250vh",
         textAlign: "center",
         margin: "auto",
       }}
