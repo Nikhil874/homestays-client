@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { BASE_URL } from "../constants";
 import { toast } from "react-hot-toast";
+import DialogBox from "./DialogBox";
 
 
 
@@ -42,25 +43,19 @@ export default function UsersTable(props) {
   
   
   const changePaymentStatusToPaid = async (row) => {
-    if (
-      window.confirm(
-        `${row.name} has completed this month's payment. Are you sure you want to confirm?`
-      )
-    ) {
-      try {
-        axios.post(`${BASE_URL}/users/${row.id}`, { paid: true }).then(res => {
-          toast.success(`${row.name} has completed the payment!`)
-          getUsersOfPg(params.id,currentPage,rowsPerPage);
-        })
-        
-      } catch (e) {
-        toast.error(e.message);
-      }
+    try {
+      axios.post(`${BASE_URL}/users/${row.id}`, { paid: true }).then((res) => {
+        toast.success(`${row.name} has completed the payment!`);
+        getUsersOfPg(params.id, currentPage, rowsPerPage);
+      });
+    } catch (e) {
+      toast.error(e.message);
     }
   };
+
   function addButton(row) {
     return !row.PaymentStatus ? (
-      <Button onClick={()=>changePaymentStatusToPaid(row)}>Pay</Button>
+      <DialogBox row={row} changePaymentStatusToPaid={changePaymentStatusToPaid} />
     ) : (
       <Button disabled={row.PaymentStatus}>Paid</Button>
     );
