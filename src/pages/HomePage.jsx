@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Box} from "@mui/material";
+import { Box, Button} from "@mui/material";
 import styled from "@emotion/styled";
 import CustomBox from "../components/CustomBox";
 import { useNavigate } from "react-router-dom";
@@ -38,19 +38,29 @@ const HomePage = () => {
       >
         {!!availableHotels?.length && availableHotels.map((hotel) => {
           return (
-            <div
-              onClick={() => {
-                return navigate(`/floors/${hotel?._id}`);
-              }}
-            >
-              <CustomBox>
-                <>
-                  <h2> PG : {hotel?.name}</h2>
-                  <h2> No of floors: {hotel?.noOfFloors}</h2>
-                  <h2> Total revenue: {hotel?.totalRevenue}</h2>
-                </>
-              </CustomBox>
-            </div>
+              <div>
+                <CustomBox>
+                  <>
+                    <h2> PG : {hotel?.name}</h2>
+                    <h2> No of floors: {hotel?.noOfFloors}</h2>
+                    <h2> Total revenue: {hotel?.totalRevenue}</h2>
+                    <Button
+                      onClick={() => {
+                        return navigate(`/floors/${hotel?._id}`);
+                      }}
+                    >
+                      Get Floor details
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        navigate(`/${hotel?._id}/payments`);
+                      }}
+                    >
+                      Click me
+                    </Button>
+                  </>
+                </CustomBox>
+              </div>
           );
         })}
       </Box>
