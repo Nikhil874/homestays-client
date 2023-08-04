@@ -51,13 +51,13 @@ const HomePage = () => {
                     >
                       Get Floor details
                     </Button>
-                    <Button
+                    {/* <Button
                       onClick={() => {
                         navigate(`/${hotel?._id}/payments`);
                       }}
                     >
                       Click me
-                    </Button>
+                    </Button> */}
                   </>
                 </CustomBox>
               </div>
