@@ -1,1 +1,1 @@
-export const BASE_URL = "https://odd-gold-coypu-cap.cyclic.cloud/api/v1/pg"
+export const BASE_URL = "https://sleepy-pear-sundress.cyclic.app/api/v1/pg"
