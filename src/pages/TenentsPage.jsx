@@ -7,6 +7,7 @@ import axios from "axios";
 import { BASE_URL } from "../constants";
 import moment from "moment/moment";
 import { toast } from "react-hot-toast";
+import UserCard from "../components/UserCustomCard";
 
 const TenentsPage = () => {
   const params = useParams();
@@ -16,6 +17,7 @@ const TenentsPage = () => {
     name: "",
     startDate: "",
     amount: "",
+    mobileNo: "",
   };
   const [userData, setUserData] = useState(defaultUser);
   const [roomData, setRoomData] = useState({});
@@ -28,12 +30,11 @@ const TenentsPage = () => {
         ...userData,
         room: roomId,
         amount: Number(userData.amount),
+        mobileNo: userData.mobileNo,
       };
       const res = await axios.post(`${BASE_URL}/users`, payload);
       toast.success("user added success");
-      console.log("current", userData);
       setUserData({ ...defaultUser });
-      // console.log(res.data);
     } catch (e) {
       toast.error(
         typeof e?.response?.data === "string"
@@ -57,7 +58,6 @@ const TenentsPage = () => {
   const getRoomData = async () => {
     try {
       const res = await axios.get(`${BASE_URL}/rooms/roomDetails/${roomId}`);
-      console.log(res?.data);
       setRoomData(res?.data);
     } catch (e) {
       console.log(e.message);
@@ -170,9 +170,9 @@ const TenentsPage = () => {
           marginLeft: "25px",
         }}
       >
-        <h4>Add User</h4>
+        <h4>Add user</h4>
         <input
-          placeholder="Enter Name"
+          placeholder="Enter name"
           value={userData?.name}
           onChange={(e) => {
             handleChange(e, "name");
@@ -183,7 +183,7 @@ const TenentsPage = () => {
           }}
         />
         <input
-          placeholder="Start Date"
+          placeholder="Start date"
           type="date"
           value={userData.startDate}
           onChange={(e) => {
@@ -195,11 +195,23 @@ const TenentsPage = () => {
           }}
         />
         <input
-          placeholder="Enter Amount"
+          placeholder="Enter amount"
           type="number"
           value={userData.amount}
           onChange={(e) => {
             handleChange(e, "amount");
+          }}
+          style={{
+            height: "45px",
+            background: "#FAF0D7",
+          }}
+        />
+        <input
+          placeholder="Enter 10 digit Number"
+          type="number"
+          value={userData.mobileNo}
+          onChange={(e) => {
+            handleChange(e, "mobileNo");
           }}
           style={{
             height: "45px",
@@ -211,7 +223,12 @@ const TenentsPage = () => {
           onClick={() => {
             addUser();
           }}
-          disabled={!userData.name || !userData.amount || !userData.startDate}
+          disabled={
+            !userData.name ||
+            !userData.amount ||
+            !userData.startDate ||
+            userData.mobileNo.length !== 10
+          }
         >
           Add
         </Button>
@@ -227,23 +244,7 @@ const TenentsPage = () => {
                 // return navigate(`/tenents/${user?._id}`);
               }}
             >
-              <CustomBox>
-                <>
-                  <h4> Name : {user?.name}</h4>
-                  <h4>
-                    Start date: {moment(user?.startDate).format("DD/MM/YYYY")}
-                  </h4>
-                  <h4>Amount: {user?.amount}</h4>
-                  <Button
-                    onClick={() => {
-                      deleteUser(user?._id);
-                    }}
-                    variant="contained"
-                  >
-                    Delete
-                  </Button>
-                </>
-              </CustomBox>
+           <UserCard user={user} getUsersData={getUsersData} roomId ={roomId}/>
             </div>
           );
         })}
