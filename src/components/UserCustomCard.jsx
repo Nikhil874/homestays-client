@@ -51,7 +51,7 @@ const UserCard = (props) => {
         <h4>Start date: {moment(user?.startDate).format("DD/MM/YYYY")}</h4>
         <h4>Amount: {user?.amount}</h4>
         <h4>
-          Phone: {" "}
+          Phone:{" "}
           <span>
             {!isEdit ? (
               user?.mobileNo
@@ -71,23 +71,26 @@ const UserCard = (props) => {
             )}
           </span>
         </h4>
-        <Button
-          sx={{ marginRight: "2px" }}
-          onClick={() => {
-            {
-              !isEdit ? setIsEdit(true) : handleSave(user?._id);
-            }
-          }}
-          variant="contained"
-          disabled={isEdit && mobile.length != 10}
-        >
-          {!isEdit ? "Edit mobile" : "Save"}
-        </Button>
+        <div style={{marginBottom:"15px"}}>
+          <Button
+            sx={{ marginRight: "2px" }}
+            onClick={() => {
+              {
+                !isEdit ? setIsEdit(true) : handleSave(user?._id);
+              }
+            }}
+            variant="contained"
+            disabled={isEdit && mobile.length != 10}
+          >
+            {!isEdit ? "Edit mobile" : "Save"}
+          </Button>
+        </div>
         <Button
           onClick={() => {
             deleteUser(user?._id);
           }}
           variant="contained"
+          disabled={isEdit}
         >
           Delete
         </Button>
