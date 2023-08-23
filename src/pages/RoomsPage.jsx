@@ -24,7 +24,14 @@ const RoomsPage = () => {
       <NavButton path={`/floors/${params.id}`} />
       <Box
         display="flex"
-        sx={{ flexWrap: "wrap", gap: "20px", marginLeft: "25px" }}
+        sx={{
+          flexWrap: "wrap",
+          gap: "20px",
+          marginLeft: { xs: "0px", md: "25px" },
+          flexDirection: { xs: "column", md: "row" },
+          justifyContent: { xs: "center" },
+          alignItems: { xs: "center" },
+        }}
       >
         {rooms?.map((room) => {
           return (
@@ -36,7 +43,7 @@ const RoomsPage = () => {
               <CustomBox>
                 <>
                   <h4> No : {room?.roomNo}</h4>
-                  <h4> sharing type: {room?.sharingType}</h4>
+                  <h4> Sharing type: {room?.sharingType}</h4>
                   <h4>No of People: {room.tenants?.length}</h4>
                 </>
               </CustomBox>

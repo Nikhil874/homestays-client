@@ -8,6 +8,7 @@ import { BASE_URL } from "../constants";
 import moment from "moment/moment";
 import { toast } from "react-hot-toast";
 import UserCard from "../components/UserCustomCard";
+import styled from "@emotion/styled";
 
 const TenentsPage = () => {
   const params = useParams();
@@ -110,21 +111,21 @@ const TenentsPage = () => {
     getRoomData();
   }, []);
   return (
-    <div>
+    <TenantDiv>
       {" "}
       <NavButton path={`/floors/${params.id}`} />
       <Box
-        style={{
+        sx={{
           width: "200px",
           height: "auto",
           border: "1px solid black",
           background: "#FAF0D7",
-          marginTop: "25px",
           padding: "25px",
           display: "flex",
           flexDirection: "column",
           gap: "20px",
-          marginLeft: "25px",
+          margin: "25px auto",
+          borderRadius:"10px"
         }}
       >
         <h4>Room Details</h4>
@@ -135,7 +136,7 @@ const TenentsPage = () => {
           Sharing type: {roomData?.sharingType}
         </h5>
         <input
-          placeholder="Enter Sharing type"
+          placeholder="Enter sharing type"
           type="number"
           value={sharingType}
           onChange={(e) => {
@@ -167,7 +168,8 @@ const TenentsPage = () => {
           display: "flex",
           flexDirection: "column",
           gap: "20px",
-          marginLeft: "25px",
+          margin: "25px auto",
+          borderRadius:"10px"
         }}
       >
         <h4>Add user</h4>
@@ -235,7 +237,14 @@ const TenentsPage = () => {
       </Box>
       <Box
         display="flex"
-        sx={{ flexWrap: "wrap", gap: "20px", marginLeft: "25px" }}
+        sx={{
+          flexWrap: "wrap",
+          gap: "20px",
+          marginLeft: { xs: "0px", md: "25px" },
+          flexDirection: { xs: "column", md: "row" },
+          justifyContent: { xs: "center", md: "none" },
+          alignItems: { xs: "center", md: "none" },
+        }}
       >
         {users?.map((user) => {
           return (
@@ -244,13 +253,21 @@ const TenentsPage = () => {
                 // return navigate(`/tenents/${user?._id}`);
               }}
             >
-           <UserCard user={user} getUsersData={getUsersData} roomId ={roomId}/>
+              <UserCard
+                user={user}
+                getUsersData={getUsersData}
+                roomId={roomId}
+              />
             </div>
           );
         })}
       </Box>
-    </div>
+    </TenantDiv>
   );
 };
+
+const TenantDiv = styled.div`
+  
+`
 
 export default TenentsPage;

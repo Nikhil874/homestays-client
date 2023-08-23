@@ -23,7 +23,14 @@ const FloorsPage = () => {
       <NavButton path={"/"} />
       <Box
         display="flex"
-        sx={{ flexWrap: "wrap", gap: "20px", marginLeft: "25px" }}
+        sx={{
+          flexWrap: "wrap",
+          gap: "20px",
+          marginLeft: { xs: "0px", md: "25px" },
+          flexDirection: { xs: "column", md: "row" },
+          justifyContent: { xs: "center" },
+          alignItems: { xs: "center" },
+        }}
       >
         {floors.map((floor) => {
           return (

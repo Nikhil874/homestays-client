@@ -17,6 +17,7 @@ const BoxContainer = styled.div`
     margin-top: 25px;
     padding: 25px;
     text-align: center;
+   border-radius: 10px;
   }
   &:hover {
     cursor: pointer;

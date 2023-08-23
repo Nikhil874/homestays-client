@@ -34,10 +34,18 @@ const HomePage = () => {
     <HomePageContainer>
       <Box
         display="flex"
-        sx={{ flexWrap: "wrap", gap: "20px", marginLeft: "25px" }}
+        sx={{
+          flexWrap: "wrap",
+          gap: "20px",
+          marginLeft: { xs: "0px", md: "25px" },
+          flexDirection:{xs:"column",md:"row"},
+          justifyContent:{xs:"center"},
+          alignItems:{xs:"center"}
+        }}
       >
-        {!!availableHotels?.length && availableHotels.map((hotel) => {
-          return (
+        {!!availableHotels?.length &&
+          availableHotels.map((hotel) => {
+            return (
               <div>
                 <CustomBox>
                   <>
@@ -48,8 +56,9 @@ const HomePage = () => {
                       onClick={() => {
                         return navigate(`/floors/${hotel?._id}`);
                       }}
+                      variant="contained"
                     >
-                      Get Floor details
+                      Get floor details
                     </Button>
                     {/* <Button
                       onClick={() => {
@@ -61,8 +70,8 @@ const HomePage = () => {
                   </>
                 </CustomBox>
               </div>
-          );
-        })}
+            );
+          })}
       </Box>
       {/* <Box
         marginLeft="25px"
